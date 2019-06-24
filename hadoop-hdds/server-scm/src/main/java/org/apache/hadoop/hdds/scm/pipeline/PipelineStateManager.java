@@ -20,6 +20,7 @@ package org.apache.hadoop.hdds.scm.pipeline;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hdds.protocol.DatanodeDetails;
+import org.apache.hadoop.hdds.protocol.proto.HddsProtos;
 import org.apache.hadoop.hdds.protocol.proto.HddsProtos.ReplicationType;
 import org.apache.hadoop.hdds.protocol.proto.HddsProtos.ReplicationFactor;
 import org.apache.hadoop.hdds.scm.container.ContainerID;
@@ -136,5 +137,29 @@ class PipelineStateManager {
       LOG.info("Pipeline {} moved to OPEN state", pipeline.toString());
     }
     return pipeline;
+  }
+
+  /**
+   * Activates a dormant pipeline.
+   *
+   * @param pipelineID ID of the pipeline to activate.
+   * @throws IOException
+   */
+  public void activatePipeline(PipelineID pipelineID)
+      throws IOException {
+    pipelineStateMap
+        .updatePipelineState(pipelineID, PipelineState.OPEN);
+  }
+
+  /**
+   * Deactivates an active pipeline.
+   *
+   * @param pipelineID ID of the pipeline to deactivate.
+   * @throws IOException
+   */
+  public void deactivatePipeline(PipelineID pipelineID)
+      throws IOException {
+    pipelineStateMap
+        .updatePipelineState(pipelineID, PipelineState.DORMANT);
   }
 }

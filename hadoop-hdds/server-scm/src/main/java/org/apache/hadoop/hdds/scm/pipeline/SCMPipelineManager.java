@@ -348,6 +348,30 @@ public class SCMPipelineManager implements PipelineManager {
   }
 
   /**
+   * Activates a dormant pipeline.
+   *
+   * @param pipelineID ID of the pipeline to activate.
+   * @throws IOException
+   */
+  @Override
+  public void activatePipeline(PipelineID pipelineID)
+      throws IOException {
+    stateManager.activatePipeline(pipelineID);
+  }
+
+  /**
+   * Deactivates an active pipeline.
+   *
+   * @param pipelineID ID of the pipeline to deactivate.
+   * @throws IOException
+   */
+  @Override
+  public void deactivatePipeline(PipelineID pipelineID)
+      throws IOException {
+    stateManager.deactivatePipeline(pipelineID);
+  }
+
+  /**
    * Moves the pipeline to CLOSED state and sends close container command for
    * all the containers in the pipeline.
    *

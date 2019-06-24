@@ -19,6 +19,7 @@
 package org.apache.hadoop.hdds.scm.pipeline;
 
 import org.apache.hadoop.hdds.protocol.DatanodeDetails;
+import org.apache.hadoop.hdds.protocol.proto.HddsProtos;
 import org.apache.hadoop.hdds.protocol.proto.HddsProtos.ReplicationFactor;
 import org.apache.hadoop.hdds.protocol.proto.HddsProtos.ReplicationType;
 import org.apache.hadoop.hdds.scm.container.ContainerID;
@@ -75,4 +76,21 @@ public interface PipelineManager extends Closeable, PipelineManagerMXBean {
   void startPipelineCreator();
 
   void triggerPipelineCreation();
+
+  /**
+   * Activates a dormant pipeline.
+   *
+   * @param pipelineID ID of the pipeline to activate.
+   * @throws IOException
+   */
+  void activatePipeline(PipelineID pipelineID) throws IOException;
+
+  /**
+   * Deactivates an active pipeline.
+   *
+   * @param pipelineID ID of the pipeline to deactivate.
+   * @throws IOException
+   */
+  void deactivatePipeline(PipelineID pipelineID) throws IOException;
+
 }
