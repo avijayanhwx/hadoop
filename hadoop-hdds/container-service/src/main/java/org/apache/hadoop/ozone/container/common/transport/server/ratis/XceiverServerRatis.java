@@ -206,7 +206,6 @@ public final class XceiverServerRatis extends XceiverServer {
 
     // Set the maximum cache segments
     RaftServerConfigKeys.Log.setMaxCachedSegmentNum(properties, 2);
-    RaftServerConfigKeys.Log.setPurgeGap(properties, 1_000_000_000);
 
     // set the node failure timeout
     setNodeFailureTimeout(conf, properties);
